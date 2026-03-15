@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexford — Education Without Borders</title>
+<meta name="description" content="Nexford is a world-class admissions consultancy helping ambitious students gain access to internationally accredited online degrees. Education Without Borders.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Brawler:ital,wght@0,400;0,700;1,400&family=Aleo:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #182471;
+  --blue: #2664C8;
+  --accent: #1423ff;
+  --gold: #c8a84b;
+  --white: #ffffff;
+  --cream: #f9f8f5;
+  --light: #eef2fb;
+  --text: #13192e;
+  --muted: #5c6480;
+  --border: #dde3f2;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'Aleo', Georgia, serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+/* ─── TYPOGRAPHY ─── */
+.display { font-family: 'Brawler', Georgia, serif; font-weight: 400; line-height: 1.05; }
+.eyebrow { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; color: var(--blue); }
+
+/* ─── NAV ─── */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 56px; height: 72px;
+  background: rgba(24,36,113,.97); backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  transition: height .3s, box-shadow .3s;
+}
+#nav.compact { height: 58px; box-shadow: 0 4px 32px rgba(24,36,113,.35); }
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+.nav-logo svg { height: 26px; width: auto; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { color: rgba(255,255,255,.78); text-decoration: none; font-size: 13.5px; letter-spacing: .04em; font-weight: 300; transition: color .2s; }
+.nav-links a:hover { color: #fff; }
+.nav-right { display: flex; align-items: center; gap: 14px; }
+.nav-btn { padding: 8px 22px; border-radius: 3px; font-family: 'Aleo', serif; font-size: 13px; font-weight: 600; letter-spacing: .05em; text-decoration: none; transition: all .2s; white-space: nowrap; }
+.nav-btn.ghost { color: rgba(255,255,255,.8); border: 1px solid rgba(255,255,255,.25); }
+.nav-btn.ghost:hover { color: #fff; border-color: rgba(255,255,255,.6); }
+.nav-btn.solid { background: #fff; color: var(--navy); }
+.nav-btn.solid:hover { background: #e8efff; transform: translateY(-1px); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: rgba(255,255,255,.8); border-radius: 2px; transition: all .3s; }
+.mobile-menu { display: none; position: fixed; top: 58px; left: 0; right: 0; background: rgba(24,36,113,.98); padding: 28px 32px; z-index: 190; flex-direction: column; gap: 20px; border-bottom: 1px solid rgba(255,255,255,.1); }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { color: rgba(255,255,255,.85); text-decoration: none; font-size: 16px; font-weight: 300; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(140deg, #0e1847 0%, #182471 30%, #1e3a9a 55%, #2664C8 80%, #3878d8 100%);
+  display: grid; place-items: center; text-align: center;
+  padding: 120px 24px 80px; position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+}
+.hero-bg::before {
+  content: ''; position: absolute;
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(38,100,200,.35) 0%, transparent 70%);
+  top: -200px; right: -100px;
+}
+.hero-bg::after {
+  content: ''; position: absolute;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(20,35,255,.2) 0%, transparent 70%);
+  bottom: -100px; left: -50px;
+}
+/* Floating orbs */
+.orb { position: absolute; border-radius: 50%; pointer-events: none; animation: drift 8s ease-in-out infinite; }
+.orb-1 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(38,100,200,.12), transparent); top: 15%; left: 8%; animation-delay: 0s; }
+.orb-2 { width: 200px; height: 200px; background: radial-gradient(circle, rgba(255,255,255,.05), transparent); top: 60%; right: 12%; animation-delay: -3s; }
+.orb-3 { width: 150px; height: 150px; background: radial-gradient(circle, rgba(200,168,75,.08), transparent); bottom: 20%; left: 30%; animation-delay: -5s; }
+@keyframes drift { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-20px) scale(1.05)} }
+
+.hero-inner { position: relative; z-index: 1; max-width: 860px; }
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18);
+  color: rgba(255,255,255,.88); font-size: 11.5px; letter-spacing: .14em;
+  padding: 7px 18px; border-radius: 24px; text-transform: uppercase; margin-bottom: 32px;
+  animation: up .8s ease both;
+}
+.hero-pill-dot { width: 7px; height: 7px; background: #60f09a; border-radius: 50%; animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+.hero h1 { font-family: 'Brawler', serif; font-size: clamp(56px,9vw,104px); color: #fff; font-weight: 400; line-height: 1.02; margin-bottom: 8px; animation: up .8s .1s ease both; }
+.hero h1 em { font-style: italic; color: rgba(255,255,255,.6); }
+.hero-tagline { font-size: clamp(12px,1.6vw,15px); color: rgba(255,255,255,.55); letter-spacing: .3em; text-transform: uppercase; margin-bottom: 52px; animation: up .8s .2s ease both; }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; animation: up .8s .3s ease both; }
+.cta-primary { background: #fff; color: var(--navy); padding: 15px 36px; border-radius: 3px; font-family: 'Aleo',serif; font-size: 14px; font-weight: 600; letter-spacing: .05em; text-decoration: none; transition: all .25s; }
+.cta-primary:hover { background: #e4ecff; transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,.25); }
+.cta-ghost { color: rgba(255,255,255,.85); border: 1px solid rgba(255,255,255,.3); padding: 15px 36px; border-radius: 3px; font-family: 'Aleo',serif; font-size: 14px; font-weight: 300; letter-spacing: .07em; text-decoration: none; transition: all .25s; }
+.cta-ghost:hover { border-color: #fff; background: rgba(255,255,255,.08); transform: translateY(-2px); }
+.hero-metrics { display: flex; gap: 64px; margin-top: 80px; animation: up .8s .45s ease both; }
+.metric { text-align: center; }
+.metric-val { font-family: 'Brawler',serif; font-size: 38px; color: #fff; line-height: 1; }
+.metric-key { font-size: 11px; color: rgba(255,255,255,.45); letter-spacing: .14em; text-transform: uppercase; margin-top: 5px; }
+.hero-scroll-hint { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; animation: up .8s .6s ease both; }
+.hero-scroll-hint span { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.3); }
+.scroll-line { width: 1px; height: 40px; background: linear-gradient(rgba(255,255,255,.3), transparent); animation: grow 2s ease-in-out infinite; }
+@keyframes grow { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
+@keyframes up { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+/* ─── SECTION BASE ─── */
+.section { padding: 100px 56px; }
+.section-sm { padding: 72px 56px; }
+.container { max-width: 1180px; margin: 0 auto; }
+.section-header { margin-bottom: 60px; }
+.section-header .eyebrow { margin-bottom: 14px; }
+.section-header h2 { font-family: 'Brawler',serif; font-size: clamp(34px,4vw,54px); font-weight: 400; color: var(--navy); line-height: 1.12; max-width: 600px; }
+.section-header h2 em { font-style: italic; color: var(--blue); }
+.section-header p { margin-top: 18px; font-size: 16px; color: var(--muted); line-height: 1.8; max-width: 560px; font-weight: 300; }
+
+/* ─── ABOUT STRIP ─── */
+.about-strip { background: var(--cream); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 88px; align-items: center; }
+.about-copy p { font-size: 17px; color: #3a4060; line-height: 1.9; font-weight: 300; }
+.about-copy p + p { margin-top: 18px; }
+.about-copy .eyebrow { margin-bottom: 18px; }
+.about-copy h2 { font-family:'Brawler',serif; font-size: clamp(30px,3.5vw,48px); color: var(--navy); line-height: 1.12; margin-bottom: 28px; }
+.about-copy h2 em { font-style: italic; color: var(--blue); }
+.about-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.fact-card { background: var(--white); border: 1px solid var(--border); border-left: 3px solid var(--blue); border-radius: 6px; padding: 22px 20px; transition: transform .2s, box-shadow .2s; }
+.fact-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(24,36,113,.09); }
+.fact-val { font-family:'Brawler',serif; font-size: 30px; color: var(--navy); }
+.fact-lbl { font-size: 12px; color: var(--muted); letter-spacing: .07em; margin-top: 4px; }
+
+/* ─── SERVICES ─── */
+.services { background: var(--white); }
+.services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+.svc-card { border: 1px solid var(--border); border-radius: 8px; padding: 34px 28px; position: relative; overflow: hidden; transition: all .3s; background: var(--white); }
+.svc-card::after { content:''; position:absolute; inset:0; background: linear-gradient(135deg,rgba(38,100,200,.04),rgba(24,36,113,.04)); opacity:0; transition:opacity .3s; }
+.svc-card:hover { transform: translateY(-6px); box-shadow: 0 18px 48px rgba(24,36,113,.1); border-color: rgba(38,100,200,.3); }
+.svc-card:hover::after { opacity:1; }
+.svc-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--navy),var(--blue)); transform:scaleX(0); transform-origin:left; transition:transform .35s; }
+.svc-card:hover::before { transform:scaleX(1); }
+.svc-num { font-family:'Brawler',serif; font-size: 44px; color: var(--light); line-height:1; margin-bottom:16px; user-select:none; }
+.svc-card h3 { font-family:'Brawler',serif; font-size: 19px; color: var(--navy); margin-bottom: 12px; }
+.svc-card p { font-size: 14px; color: var(--muted); line-height: 1.75; font-weight: 300; }
+.svc-tag { display:inline-block; margin-top:18px; font-size:11px; letter-spacing:.08em; color:var(--blue); border-bottom:1px solid currentColor; padding-bottom:1px; text-transform:uppercase; }
+
+/* ─── UNIVERSITIES ─── */
+.universities { background: var(--cream); }
+.uni-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 4px 24px rgba(24,36,113,.06); }
+table.uni-table { width: 100%; border-collapse: collapse; min-width: 900px; }
+.uni-table thead tr { background: var(--navy); }
+.uni-table thead th { padding: 14px 18px; text-align: left; font-family:'Aleo',serif; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.75); font-weight: 600; white-space: nowrap; }
+.uni-table tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; cursor: default; }
+.uni-table tbody tr:last-child { border: none; }
+.uni-table tbody tr:nth-child(even) { background: rgba(238,242,251,.5); }
+.uni-table tbody tr:hover { background: var(--light); }
+.uni-table td { padding: 14px 18px; font-size: 13.5px; color: var(--text); vertical-align: middle; }
+.uni-table td:first-child { font-family:'Brawler',serif; font-size: 15px; color: var(--navy); font-weight: 400; }
+.uni-flag { font-size: 17px; margin-right: 4px; }
+.badge { display:inline-block; font-size:10px; padding:2px 9px; border-radius:12px; font-weight:600; letter-spacing:.06em; }
+.badge-blue { background:var(--light); color:var(--navy); border:1px solid rgba(38,100,200,.2); }
+.badge-gold { background:#fdf6e3; color:#7a5c10; border:1px solid rgba(200,168,75,.35); }
+.stars { color: var(--gold); font-size: 12px; letter-spacing: 1px; }
+.fee-val { font-weight: 600; color: var(--navy); }
+
+/* ─── PROCESS ─── */
+.process { background: var(--navy); padding: 96px 56px; }
+.process .section-header h2 { color: #fff; }
+.process .section-header h2 em { color: rgba(255,255,255,.5); }
+.process .section-header p { color: rgba(255,255,255,.5); }
+.process .eyebrow { color: rgba(255,255,255,.45); }
+.process-track { display: flex; gap: 0; position: relative; counter-reset: step; }
+.process-track::before { content:''; position:absolute; top: 36px; left: 0; right: 0; height: 1px; background: rgba(255,255,255,.12); z-index: 0; }
+.proc-step { flex: 1; text-align: center; position: relative; z-index: 1; padding: 0 12px; }
+.proc-circle {
+  width: 72px; height: 72px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.07);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  font-family:'Brawler',serif; font-size: 22px; color: #fff;
+  transition: all .3s;
+}
+.proc-step:hover .proc-circle { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.5); transform: scale(1.08); }
+.proc-title { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.9); margin-bottom: 8px; letter-spacing: .04em; }
+.proc-desc { font-size: 12px; color: rgba(255,255,255,.42); line-height: 1.6; font-weight: 300; }
+
+/* ─── PACKAGES ─── */
+.packages { background: var(--white); }
+.pkg-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+.pkg-card { border: 1px solid var(--border); border-radius: 10px; padding: 32px 24px; position: relative; transition: all .3s; }
+.pkg-card.featured { border-color: var(--blue); border-width: 2px; }
+.pkg-popular { position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:var(--blue); color:#fff; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:4px 14px; border-radius:12px; white-space:nowrap; font-weight:600; }
+.pkg-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(24,36,113,.1); }
+.pkg-name { font-family:'Brawler',serif; font-size: 22px; color: var(--navy); margin-bottom: 6px; }
+.pkg-price { font-family:'Brawler',serif; font-size: 36px; color: var(--blue); margin: 16px 0 4px; }
+.pkg-price sup { font-size: 18px; vertical-align: super; }
+.pkg-note { font-size: 12px; color: var(--muted); margin-bottom: 24px; font-style: italic; }
+.pkg-divider { height: 1px; background: var(--border); margin-bottom: 20px; }
+.pkg-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.pkg-features li { font-size: 13px; color: #3a4060; display: flex; gap: 10px; align-items: flex-start; line-height: 1.45; font-weight: 300; }
+.pkg-features li::before { content:'✓'; color: var(--blue); font-weight: 700; flex-shrink: 0; font-size: 13px; }
+.pkg-features li.dim { color: var(--muted); }
+.pkg-features li.dim::before { content:'—'; color: var(--border); }
+.pkg-cta { display:block; margin-top:28px; padding:12px; text-align:center; border-radius:5px; font-family:'Aleo',serif; font-size:13px; font-weight:600; letter-spacing:.06em; text-decoration:none; transition:all .2s; }
+.pkg-cta.primary { background: var(--navy); color: #fff; }
+.pkg-cta.primary:hover { background: var(--blue); }
+.pkg-cta.outline { border: 1px solid var(--border); color: var(--navy); }
+.pkg-cta.outline:hover { border-color: var(--blue); color: var(--blue); background: var(--light); }
+
+/* ─── INQUIRY / CONTACT ─── */
+.contact { background: var(--cream); }
+.contact-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 80px; align-items: start; }
+.contact-left h2 { font-family:'Brawler',serif; font-size: clamp(30px,3.5vw,46px); color: var(--navy); line-height: 1.12; margin: 14px 0 20px; }
+.contact-left h2 em { font-style: italic; color: var(--blue); }
+.contact-left p { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 36px; font-weight: 300; }
+.contact-detail { display:flex; gap:14px; align-items:flex-start; margin-bottom:20px; }
+.cd-icon { width:40px; height:40px; background:var(--light); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; }
+.cd-label { font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+.cd-val { font-size:14px; color:var(--text); margin-top:2px; font-weight:400; }
+.contact-form { background: var(--white); border-radius: 12px; padding: 44px 40px; border: 1px solid var(--border); box-shadow: 0 6px 32px rgba(24,36,113,.07); }
+.contact-form h3 { font-family:'Brawler',serif; font-size: 26px; color: var(--navy); margin-bottom: 8px; }
+.contact-form .sub { font-size: 13px; color: var(--muted); margin-bottom: 28px; font-weight: 300; }
+.frow { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.fg { margin-bottom: 18px; }
+.fg label { display:block; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:7px; font-weight:600; }
+.fg input, .fg select, .fg textarea {
+  width:100%; padding:11px 15px; border:1px solid var(--border); border-radius:5px;
+  font-family:'Aleo',serif; font-size:14px; color:var(--text);
+  background:var(--cream); outline:none; transition:border .2s, background .2s;
+  -webkit-appearance: none;
+}
+.fg input:focus, .fg select:focus, .fg textarea:focus { border-color:var(--blue); background:#fff; }
+.fg textarea { height:96px; resize:none; }
+.fg select { cursor:pointer; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235c6480' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px; }
+.submit-btn { width:100%; padding:14px; background:var(--navy); color:#fff; border:none; border-radius:5px; cursor:pointer; font-family:'Aleo',serif; font-size:14px; font-weight:600; letter-spacing:.06em; transition:all .25s; }
+.submit-btn:hover { background:var(--blue); transform:translateY(-1px); }
+.submit-btn:active { transform:translateY(0); }
+.form-success { display:none; text-align:center; padding:24px; background:#e8f5e9; border-radius:8px; margin-top:16px; }
+.form-success .icon { font-size:32px; margin-bottom:10px; }
+.form-success p { font-size:15px; color:#2e7d32; }
+
+/* ─── FOOTER ─── */
+footer { background: #0e1847; color: rgba(255,255,255,.6); padding: 64px 56px 32px; }
+.footer-grid { display:grid; grid-template-columns:2.2fr 1fr 1fr 1fr; gap:56px; margin-bottom:48px; }
+.footer-brand-logo { height:22px; width:auto; margin-bottom:16px; }
+.footer-brand p { font-size:13px; line-height:1.75; max-width:260px; font-weight:300; }
+.footer-col h4 { color:#fff; font-size:11px; letter-spacing:.15em; text-transform:uppercase; margin-bottom:18px; font-weight:600; }
+.footer-col ul { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.footer-col ul a { color:rgba(255,255,255,.55); text-decoration:none; font-size:13px; font-weight:300; transition:color .2s; }
+.footer-col ul a:hover { color:#fff; }
+.footer-bottom { border-top:1px solid rgba(255,255,255,.08); padding-top:24px; display:flex; justify-content:space-between; align-items:center; }
+.footer-bottom p { font-size:12px; }
+.footer-socials { display:flex; gap:10px; }
+.social-btn { width:34px; height:34px; border:1px solid rgba(255,255,255,.18); border-radius:5px; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.5); font-size:13px; text-decoration:none; transition:all .2s; font-style:normal; }
+.social-btn:hover { border-color:rgba(255,255,255,.5); color:#fff; background:rgba(255,255,255,.07); }
+
+/* ─── REVEAL ANIMATION ─── */
+.reveal { opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; }
+.reveal.show { opacity:1; transform:translateY(0); }
+.reveal-delay-1 { transition-delay:.08s; }
+.reveal-delay-2 { transition-delay:.16s; }
+.reveal-delay-3 { transition-delay:.24s; }
+.reveal-delay-4 { transition-delay:.32s; }
+.reveal-delay-5 { transition-delay:.40s; }
+.reveal-delay-6 { transition-delay:.48s; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width:1024px) {
+  .services-grid { grid-template-columns:1fr 1fr; }
+  .pkg-grid { grid-template-columns:1fr 1fr; }
+  .about-grid { grid-template-columns:1fr; gap:48px; }
+  .footer-grid { grid-template-columns:1fr 1fr; gap:32px; }
+}
+@media (max-width:768px) {
+  #nav { padding:0 24px; }
+  .nav-links, .nav-right { display:none; }
+  .hamburger { display:flex; }
+  .section, .section-sm { padding:64px 24px; }
+  .process { padding:72px 24px; }
+  .hero-metrics { gap:32px; flex-wrap:wrap; justify-content:center; }
+  .services-grid { grid-template-columns:1fr; }
+  .pkg-grid { grid-template-columns:1fr; }
+  .contact-grid { grid-template-columns:1fr; gap:40px; }
+  .frow { grid-template-columns:1fr; }
+  .process-track { flex-direction:column; gap:28px; }
+  .process-track::before { display:none; }
+  .footer-grid { grid-template-columns:1fr; gap:28px; }
+  .footer-bottom { flex-direction:column; gap:16px; text-align:center; }
+  footer { padding:48px 24px 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 200 600 100" fill="white">
+      <text y="290" font-family="Georgia,serif" font-style="italic" font-size="88" letter-spacing="2">Nexford</text>
+    </svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#universities">Universities</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#universities" class="nav-btn ghost">Compare Universities</a>
+    <a href="#contact" class="nav-btn solid">Book Consultation</a>
+  </div>
+  <div class="hamburger" onclick="toggleNav()" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeNav()">About</a>
+  <a href="#services" onclick="closeNav()">Services</a>
+  <a href="#universities" onclick="closeNav()">Universities</a>
+  <a href="#packages" onclick="closeNav()">Packages</a>
+  <a href="#contact" onclick="closeNav()">Book Consultation</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-pill"><span class="hero-pill-dot"></span>Admissions Consultancy · UAE & Global</div>
+    <h1 class="display">Education<br><em>Without</em> Borders</h1>
+    <p class="hero-tagline">Your pathway to world-class universities</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="cta-primary">Book Free Consultation</a>
+      <a href="#universities" class="cta-ghost">Explore Universities</a>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric"><div class="metric-val">50+</div><div class="metric-key">Countries Served</div></div>
+      <div class="metric"><div class="metric-val">12+</div><div class="metric-key">Partner Universities</div></div>
+      <div class="metric"><div class="metric-val">95%</div><div class="metric-key">Admission Success</div></div>
+      <div class="metric"><div class="metric-val">Free</div><div class="metric-key">First Consultation</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about-strip" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <div class="eyebrow">Who We Are</div>
+        <h2>Guiding ambitious students to <em>global education</em></h2>
+        <p>Nexford is an admissions consultancy built for students who refuse to let geography, cost, or bureaucracy stand between them and a world-class education.</p>
+        <p>We specialize in online and hybrid degree programs from internationally accredited universities — handling everything from university selection to application submission and beyond.</p>
+      </div>
+      <div class="about-facts reveal reveal-delay-2">
+        <div class="fact-card">
+          <div class="fact-val">Free</div>
+          <div class="fact-lbl">Initial Consultation</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-val">48h</div>
+          <div class="fact-lbl">Response Guarantee</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-val">End-to-End</div>
+          <div class="fact-lbl">Application Support</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-val">Global</div>
+          <div class="fact-lbl">University Network</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section services" id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow">What We Offer</div>
+      <h2>Every step, <em>handled for you</em></h2>
+      <p>From your first inquiry to your enrollment confirmation — Nexford manages the entire admissions journey.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card reveal reveal-delay-1">
+        <div class="svc-num">01</div>
+        <h3>University Matching</h3>
+        <p>We analyze your academic profile, career goals, and budget to shortlist the 2–3 universities where you have the highest chance of admission and best return on investment.</p>
+        <span class="svc-tag">All packages</span>
+      </div>
+      <div class="svc-card reveal reveal-delay-2">
+        <div class="svc-num">02</div>
+        <h3>Document Preparation</h3>
+        <p>We review and polish your transcripts, CV, personal statement, and reference letters — ensuring every document meets the exact standards of your target institutions.</p>
+        <span class="svc-tag">All packages</span>
+      </div>
+      <div class="svc-card reveal reveal-delay-3">
+        <div class="svc-num">03</div>
+        <h3>Personal Statement</h3>
+        <p>Your personal statement is your voice. We help craft a compelling narrative that connects your unique background and ambitions to your chosen program.</p>
+        <span class="svc-tag">Standard & above</span>
+      </div>
+      <div class="svc-card reveal reveal-delay-1">
+        <div class="svc-num">04</div>
+        <h3>Application Submission</h3>
+        <p>We manage the complete submission process — form completion, document upload, portal submission, and confirmation tracking — across multiple universities simultaneously.</p>
+        <span class="svc-tag">All packages</span>
+      </div>
+      <div class="svc-card reveal reveal-delay-2">
+        <div class="svc-num">05</div>
+        <h3>Visa Guidance</h3>
+        <p>For students relocating or enrolling in blended programs, we provide comprehensive student visa guidance tailored to your nationality and destination country.</p>
+        <span class="svc-tag">Premium & Elite</span>
+      </div>
+      <div class="svc-card reveal reveal-delay-3">
+        <div class="svc-num">06</div>
+        <h3>Post-Offer Support</h3>
+        <p>We stay with you after your offer letter arrives — through enrollment, orientation, and your first semester. You're never navigating the system alone.</p>
+        <span class="svc-tag">Elite package</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UNIVERSITIES -->
+<section class="section universities" id="universities">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow">Our Network</div>
+      <h2>12+ partner universities, <em>compared honestly</em></h2>
+      <p>We recommend only universities we have personally vetted. No paid placements — only institutions with proven outcomes for our students.</p>
+    </div>
+    <div class="reveal">
+    <div class="uni-table-wrap">
+      <table class="uni-table">
+        <thead>
+          <tr>
+            <th>University</th>
+            <th>Location</th>
+            <th>Programs</th>
+            <th>Annual Fees</th>
+            <th>Intakes</th>
+            <th>Accreditation</th>
+            <th>English Req.</th>
+            <th>Best For</th>
+            <th>Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nexford University</td>
+            <td><span class="uni-flag">🇺🇸</span>USA · Online</td>
+            <td>BBA, MBA</td>
+            <td class="fee-val">$3,600</td>
+            <td>Monthly</td>
+            <td><span class="badge badge-gold">DEAC</span></td>
+            <td>None required</td>
+            <td>Best value online MBA</td>
+            <td><span class="stars">★★★★★</span></td>
+          </tr>
+          <tr>
+            <td>University of People</td>
+            <td><span class="uni-flag">🇺🇸</span>USA · Online</td>
+            <td>BBA, MBA, CS</td>
+            <td class="fee-val">$4,840</td>
+            <td>Rolling</td>
+            <td><span class="badge badge-gold">DEAC</span></td>
+            <td>None required</td>
+            <td>No English test needed</td>
+            <td><span class="stars">★★★★★</span></td>
+          </tr>
+          <tr>
+            <td>University of London</td>
+            <td><span class="uni-flag">🇬🇧</span>UK · Online</td>
+            <td>BSc, MBA</td>
+            <td class="fee-val">$7,000</td>
+            <td>Jan / May / Sep</td>
+            <td><span class="badge badge-blue">AACSB</span></td>
+            <td>IELTS 6.5</td>
+            <td>Strong global brand</td>
+            <td><span class="stars">★★★★☆</span></td>
+          </tr>
+          <tr>
+            <td>Heriot-Watt University</td>
+            <td><span class="uni-flag">🇦🇪</span>Dubai / UK</td>
+            <td>MBA, MSc</td>
+            <td class="fee-val">$8,500</td>
+            <td>Sep / Jan</td>
+            <td><span class="badge badge-blue">AACSB</span></td>
+            <td>IELTS 6.5</td>
+            <td>Dubai campus option</td>
+            <td><span class="stars">★★★★☆</span></td>
+          </tr>
+          <tr>
+            <td>Coventry University</td>
+            <td><span class="uni-flag">🇬🇧</span>UK · Online</td>
+            <td>MBA, MSc</td>
+            <td class="fee-val">$6,200</td>
+            <td>Rolling</td>
+            <td><span class="badge badge-blue">UK Gov</span></td>
+            <td>IELTS 6.0</td>
+            <td>Affordable UK degree</td>
+            <td><span class="stars">★★★☆☆</span></td>
+          </tr>
+          <tr>
+            <td>IE University</td>
+            <td><span class="uni-flag">🇪🇸</span>Spain · Online</td>
+            <td>MBA, Masters</td>
+            <td class="fee-val">$18,000</td>
+            <td>Rolling</td>
+            <td><span class="badge badge-blue">AACSB+EQUIS</span></td>
+            <td>IELTS 7.0</td>
+            <td>Premium brand MBA</td>
+            <td><span class="stars">★★★★☆</span></td>
+          </tr>
+          <tr>
+            <td>African Leadership Uni.</td>
+            <td><span class="uni-flag">🌍</span>Pan-African</td>
+            <td>BSc Business</td>
+            <td class="fee-val">$6,000</td>
+            <td>Rolling</td>
+            <td><span class="badge badge-gold">Pan-African</span></td>
+            <td>None required</td>
+            <td>Africa-focused students</td>
+            <td><span class="stars">★★★★☆</span></td>
+          </tr>
+          <tr>
+            <td>Amity University Online</td>
+            <td><span class="uni-flag">🇮🇳</span>India · Online</td>
+            <td>BBA, MBA</td>
+            <td class="fee-val">$1,200</td>
+            <td>Rolling</td>
+            <td><span class="badge badge-gold">UGC</span></td>
+            <td>None required</td>
+            <td>South Asian students</td>
+            <td><span class="stars">★★★☆☆</span></td>
+          </tr>
+          <tr>
+            <td>SP Jain Global</td>
+            <td><span class="uni-flag">🇦🇪</span>Dubai / Australia</td>
+            <td>BBA, GMBA</td>
+            <td class="fee-val">$24,000</td>
+            <td>Rolling</td>
+            <td><span class="badge badge-blue">AACSB</span></td>
+            <td>IELTS 6.5</td>
+            <td>Dubai premium campus</td>
+            <td><span class="stars">★★★★☆</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow">How It Works</div>
+      <h2>From first inquiry to <em>enrollment</em></h2>
+      <p>A structured, transparent process that puts you in control at every stage.</p>
+    </div>
+    <div class="process-track">
+      <div class="proc-step reveal reveal-delay-1">
+        <div class="proc-circle">1</div>
+        <div class="proc-title">Free Consultation</div>
+        <div class="proc-desc">Share your goals, background & budget with our advisors</div>
+      </div>
+      <div class="proc-step reveal reveal-delay-2">
+        <div class="proc-circle">2</div>
+        <div class="proc-title">University Match</div>
+        <div class="proc-desc">We shortlist your 2–3 best-fit universities with a comparison</div>
+      </div>
+      <div class="proc-step reveal reveal-delay-3">
+        <div class="proc-circle">3</div>
+        <div class="proc-title">Document Prep</div>
+        <div class="proc-desc">We prepare, review & perfect every application document</div>
+      </div>
+      <div class="proc-step reveal reveal-delay-4">
+        <div class="proc-circle">4</div>
+        <div class="proc-title">We Submit</div>
+        <div class="proc-desc">Full application submission & ongoing follow-up with universities</div>
+      </div>
+      <div class="proc-step reveal reveal-delay-5">
+        <div class="proc-circle">5</div>
+        <div class="proc-title">You Enroll</div>
+        <div class="proc-desc">Accept your offer, complete enrollment, start your degree</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="section packages" id="packages">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow">Pricing</div>
+      <h2>Transparent packages, <em>no hidden fees</em></h2>
+      <p>Choose the level of support that fits your needs. All packages include a free 30-minute initial consultation.</p>
+    </div>
+    <div class="pkg-grid">
+      <div class="pkg-card reveal reveal-delay-1">
+        <div class="pkg-name">Essential</div>
+        <div class="pkg-price"><sup>$</sup>299</div>
+        <div class="pkg-note">One-time payment</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li>Document review & feedback</li>
+          <li>1 university application</li>
+          <li>Application submission</li>
+          <li class="dim">Personal statement writing</li>
+          <li class="dim">Visa guidance</li>
+          <li class="dim">Post-offer support</li>
+        </ul>
+        <a href="#contact" class="pkg-cta outline">Get Started</a>
+      </div>
+      <div class="pkg-card featured reveal reveal-delay-2">
+        <div class="pkg-popular">Most Popular</div>
+        <div class="pkg-name">Standard</div>
+        <div class="pkg-price"><sup>$</sup>499</div>
+        <div class="pkg-note">One-time payment</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li>Document review & polish</li>
+          <li>2 university applications</li>
+          <li>Personal statement review</li>
+          <li>Application submission</li>
+          <li>48h priority response</li>
+          <li class="dim">Visa guidance</li>
+        </ul>
+        <a href="#contact" class="pkg-cta primary">Get Started</a>
+      </div>
+      <div class="pkg-card reveal reveal-delay-3">
+        <div class="pkg-name">Premium</div>
+        <div class="pkg-price"><sup>$</sup>799</div>
+        <div class="pkg-note">One-time payment</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li>Full document preparation</li>
+          <li>3 university applications</li>
+          <li>Personal statement writing</li>
+          <li>Application + follow-up</li>
+          <li>Student visa guidance</li>
+          <li class="dim">Arrival support</li>
+        </ul>
+        <a href="#contact" class="pkg-cta outline">Get Started</a>
+      </div>
+      <div class="pkg-card reveal reveal-delay-4">
+        <div class="pkg-name">Elite</div>
+        <div class="pkg-price"><sup>$</sup>1,199</div>
+        <div class="pkg-note">One-time payment</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li>Complete document suite</li>
+          <li>Unlimited applications</li>
+          <li>Personal statement writing</li>
+          <li>Full visa guidance</li>
+          <li>Post-offer & enrollment</li>
+          <li>Arrival support</li>
+        </ul>
+        <a href="#contact" class="pkg-cta outline">Get Started</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / INQUIRY FORM -->
+<section class="section contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <div class="eyebrow">Get In Touch</div>
+        <h2>Start your <em>journey</em> today</h2>
+        <p>Book a free 30-minute consultation with our admissions team. We'll review your profile, answer all your questions, and map the best path to your degree — with no obligation.</p>
+        <div class="contact-detail">
+          <div class="cd-icon">📧</div>
+          <div>
+            <div class="cd-label">Email</div>
+            <div class="cd-val">nexford.global@gmail.com</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon">💬</div>
+          <div>
+            <div class="cd-label">WhatsApp</div>
+            <div class="cd-val">Available for quick questions</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon">🌍</div>
+          <div>
+            <div class="cd-label">We Serve</div>
+            <div class="cd-val">Middle East, Africa, South Asia & beyond</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon">⏱</div>
+          <div>
+            <div class="cd-label">Response Time</div>
+            <div class="cd-val">Within 48 hours, guaranteed</div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal reveal-delay-2">
+        <h3>Book Your Free Consultation</h3>
+        <p class="sub">Fill in your details and we'll get back to you within 48 hours to schedule your session.</p>
+        <form id="inquiryForm" onsubmit="handleSubmit(event)">
+          <div class="frow">
+            <div class="fg"><label>First Name *</label><input type="text" name="fname" placeholder="Aisha" required></div>
+            <div class="fg"><label>Last Name *</label><input type="text" name="lname" placeholder="Mohammed" required></div>
+          </div>
+          <div class="fg"><label>Email Address *</label><input type="email" name="email" placeholder="you@email.com" required></div>
+          <div class="frow">
+            <div class="fg"><label>Country *</label><input type="text" name="country" placeholder="UAE, Nigeria, India..." required></div>
+            <div class="fg"><label>WhatsApp Number</label><input type="tel" name="phone" placeholder="+971 50 000 0000"></div>
+          </div>
+          <div class="fg">
+            <label>Program of Interest *</label>
+            <select name="program" required>
+              <option value="">Select a program...</option>
+              <option>Bachelor of Business Administration (BBA)</option>
+              <option>Master of Business Administration (MBA)</option>
+              <option>MSc Data Science / Technology</option>
+              <option>BSc Computer Science</option>
+              <option>LLM / Law</option>
+              <option>Not sure yet — need guidance</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Preferred Package</label>
+            <select name="package">
+              <option value="">No preference / advise me</option>
+              <option>Essential — $299</option>
+              <option>Standard — $499</option>
+              <option>Premium — $799</option>
+              <option>Elite — $1,199</option>
+            </select>
+          </div>
+          <div class="fg"><label>Message / Questions</label><textarea name="message" placeholder="Tell us about your background, goals, timeline, or any questions you have..."></textarea></div>
+          <button type="submit" class="submit-btn">Send Consultation Request →</button>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <div class="icon">🎉</div>
+          <p><strong>Request received!</strong><br>We'll contact you within 48 hours to schedule your free consultation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <svg class="footer-brand-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 200 600 100" fill="white">
+          <text y="290" font-family="Georgia,serif" font-style="italic" font-size="88" letter-spacing="2">Nexford</text>
+        </svg>
+        <p>Education Without Borders. Helping students from emerging markets access world-class, internationally accredited universities.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">University Matching</a></li>
+          <li><a href="#services">Document Preparation</a></li>
+          <li><a href="#services">Personal Statement</a></li>
+          <li><a href="#services">Visa Guidance</a></li>
+          <li><a href="#services">Post-Offer Support</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Universities</h4>
+        <ul>
+          <li><a href="#universities">Nexford University</a></li>
+          <li><a href="#universities">University of London</a></li>
+          <li><a href="#universities">Heriot-Watt Dubai</a></li>
+          <li><a href="#universities">African Leadership Uni.</a></li>
+          <li><a href="#universities">View All 12+</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About Nexford</a></li>
+          <li><a href="#process">How It Works</a></li>
+          <li><a href="#packages">Pricing</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+          <li><a href="mailto:nexford.global@gmail.com">Email Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Nexford Global — Education Without Borders. All rights reserved.</p>
+      <div class="footer-socials">
+        <a href="https://linkedin.com" class="social-btn" target="_blank"><i>in</i></a>
+        <a href="https://instagram.com" class="social-btn" target="_blank"><i>ig</i></a>
+        <a href="#" class="social-btn"><i>𝕏</i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav compact on scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('compact', window.scrollY > 50);
+});
+
+// Mobile nav
+function toggleNav() {
+  const m = document.getElementById('mobileMenu');
+  m.classList.toggle('open');
+}
+function closeNav() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('show');
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Form submit
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.submit-btn');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  setTimeout(() => {
+    document.getElementById('inquiryForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }, 900);
+}
+</script>
+</body>
+</html>
